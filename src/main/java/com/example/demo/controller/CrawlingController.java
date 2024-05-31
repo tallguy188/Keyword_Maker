@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Crawling;
 import com.example.demo.service.CrawlingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,15 @@ public class CrawlingController {
 
     @GetMapping("")
     public void crawling() throws IOException {
+
         crawlingService.crawl();
+        crawlingService.findAll();
+
     }
+
+//    @GetMapping("/all")
+//    public List<Crawling> crawlingList {
+//        return crawlingService.findAll();
+//    }
 
 }

@@ -24,7 +24,7 @@ public class Crawling {
     @Column
     private long crawlingId;
 
-    @Column
+    @Column(length = 50000)
     private String rawData;
 
     @CreatedDate

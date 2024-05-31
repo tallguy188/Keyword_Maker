@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
+import com.example.demo.client.KeywordServerClient;
+import com.example.demo.dto.CrawlingDto;
+import com.example.demo.entity.Crawling;
 import com.example.demo.repository.CrawlingRepository;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
@@ -7,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -14,6 +18,7 @@ import java.util.List;
 public class CrawlingService {
 
     private final CrawlingRepository crawlingRepository;
+    private final KeywordServerClient keywordServerClient;
 
     List<String> pressIdList = List.of("081", "055", "018", "057", "032", "368", "028", "015", "029", "025",
                                                 "016", "308", "056", "047", "277", "109", "422", "117", "052", "076",
@@ -22,8 +27,9 @@ public class CrawlingService {
                                                 "326", "005", "241", "092", "073", "904", "002", "009", "021", "930",
                                                 "079");
 
-    StringBuilder textData = new StringBuilder();
+
     public void crawl(){
+        StringBuilder textData = new StringBuilder();
         // 각각 언론사 별로 num 언론사 추가
         for (String id: pressIdList) {
             String url = "https://newsstand.naver.com/include/page/" + id + ".html";
@@ -35,14 +41,27 @@ public class CrawlingService {
                 String text = document.text();
 
                 // 스트링빌더에 추가
-                textData.append(text);
+                textData.append(text + "\n");
             }catch (IOException e) {
                 e.printStackTrace();
 
             }
-            // 추출데이터 출력
-            System.out.println(textData.toString());
+        }
+        // 추출데이터 출력
+        Crawling crawling = new Crawling();
+        crawling.setRawData(textData.toString());
+        crawling.setCreatedTime(LocalDateTime.now());
+        crawlingRepository.save(crawling);
+
+        // Crawling 데이터를 CrawlingDto로 변환
+        CrawlingDto crawlingDto = new CrawlingDto(crawling);
+        keywordServerClient.sendRawData(crawlingDto);
+    }
+
+    public void findAll() {
+        List<Crawling> crawlingList = crawlingRepository.findAll();
+        for (Crawling crawling: crawlingList) {
+            System.out.println(crawling.getCreatedTime());
         }
     }
 }
-
