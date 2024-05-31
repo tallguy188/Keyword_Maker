@@ -22,11 +22,26 @@ public class CrawlingService {
                                                 "326", "005", "241", "092", "073", "904", "002", "009", "021", "930",
                                                 "079");
 
-
-    public void crawl() throws IOException {
+    StringBuilder textData = new StringBuilder();
+    public void crawl(){
         // 각각 언론사 별로 num 언론사 추가
         for (String id: pressIdList) {
+            String url = "https://newsstand.naver.com/include/page/" + id + ".html";
 
+            try {
+                // url에서 HTML 가져옴
+                Document document= Jsoup.connect(url).get();
+                // 텍스트 추출
+                String text = document.text();
+
+                // 스트링빌더에 추가
+                textData.append(text);
+            }catch (IOException e) {
+                e.printStackTrace();
+
+            }
+            // 추출데이터 출력
+            System.out.println(textData.toString());
         }
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -18,8 +19,8 @@ public class CrawlingController {
     private final CrawlingService crawlingService;
 
     @GetMapping("")
-    public void crawling() {
-        return crawlingService.crawl();
+    public void crawling() throws IOException {
+        crawlingService.crawl();
     }
 
 }
