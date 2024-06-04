@@ -29,6 +29,7 @@ public class CrawlingService {
 
 
     public void crawl(){
+
         StringBuilder textData = new StringBuilder();
         // 각각 언론사 별로 num 언론사 추가
         for (String id: pressIdList) {
@@ -64,4 +65,8 @@ public class CrawlingService {
             System.out.println(crawling.getCreatedTime());
         }
     }
+
+
+
+
 }

@@ -3,9 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.Crawling;
 import com.example.demo.service.CrawlingService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,13 +11,13 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/crawl/")
+@RequestMapping("/crawl")
 @RequiredArgsConstructor
 public class CrawlingController {
 
     private final CrawlingService crawlingService;
 
-    @GetMapping("")
+    @PostMapping("")
     public void crawling() throws IOException {
 
         crawlingService.crawl();
