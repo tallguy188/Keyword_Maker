@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -67,7 +68,23 @@ public class CrawlingService {
         }
     }
 
+    public CrawlingDto findById(long id) {
+        Optional<Crawling> optionalCrawling = crawlingRepository.findById(id);
+        if (optionalCrawling.isPresent()) {
+            return new CrawlingDto(optionalCrawling.get());
+        } else {
+            return null;
+        }
+    }
 
 
+    public CrawlingDto getLatestCrawlingData() {
 
+        List<Crawling> crawlingList = crawlingRepository.findAll();
+        if(crawlingList.isEmpty()) {
+            return null;
+        }
+        Crawling latestCrawling = crawlingList.get(crawlingList.size()-1);
+        return new CrawlingDto(latestCrawling);
+    }
 }

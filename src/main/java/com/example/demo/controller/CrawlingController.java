@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.CrawlingDto;
 import com.example.demo.entity.Crawling;
 import com.example.demo.service.CrawlingService;
+import jakarta.ws.rs.GET;
 import lombok.RequiredArgsConstructor;
 import org.bouncycastle.crypto.engines.CramerShoupCiphertext;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +28,15 @@ public class CrawlingController {
 
     }
 
-//    @GetMapping("/all")
-//    public List<Crawling> crawlingList {
-//        return crawlingService.findAll();
-//    }
+    @GetMapping("/{crawlingId}")
+    public ResponseEntity<CrawlingDto> sendCrawling(@PathVariable long crawlingId) {
+        CrawlingDto crawlingDto = crawlingService.findById(crawlingId);
+        return ResponseEntity.ok(crawlingDto);
+    }
 
+    @GetMapping("/latest")
+    public ResponseEntity<CrawlingDto> getLatestCrawlingData() {
+        CrawlingDto crawlingDto = crawlingService.getLatestCrawlingData();
+        return ResponseEntity.ok(crawlingDto);
+    }
 }
