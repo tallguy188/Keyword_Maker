@@ -28,7 +28,7 @@ public class CrawlingService {
                                                 "079");
 
 
-    public void crawl(){
+    public CrawlingDto crawl(){
 
         StringBuilder textData = new StringBuilder();
         // 각각 언론사 별로 num 언론사 추가
@@ -57,6 +57,7 @@ public class CrawlingService {
         // Crawling 데이터를 CrawlingDto로 변환
         CrawlingDto crawlingDto = new CrawlingDto(crawling);
         keywordServerClient.sendRawData(crawlingDto);
+        return crawlingDto;
     }
 
     public void findAll() {

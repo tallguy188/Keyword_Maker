@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.CrawlingDto;
 import com.example.demo.entity.Crawling;
 import com.example.demo.service.CrawlingService;
 import lombok.RequiredArgsConstructor;
+import org.bouncycastle.crypto.engines.CramerShoupCiphertext;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -18,10 +21,9 @@ public class CrawlingController {
     private final CrawlingService crawlingService;
 
     @PostMapping("")
-    public void crawling() throws IOException {
-
-        crawlingService.crawl();
-        crawlingService.findAll();
+    public ResponseEntity<CrawlingDto> crawling() throws IOException {
+        CrawlingDto crawlingDto  = crawlingService.crawl();
+        return ResponseEntity.ok(crawlingDto);
 
     }
 
