@@ -54,7 +54,7 @@ public class CrawlingService {
         crawlingRepository.save(crawling);
     }
 
-    
+
 
     public Crawling findRecentData() {
         Crawling crawling = crawlingRepository.findFirstByOrderByCreatedTimeDesc();
