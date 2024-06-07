@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -53,16 +54,11 @@ public class CrawlingService {
         crawlingRepository.save(crawling);
     }
 
-    public void findAll() {
-        List<Crawling> crawlingList = crawlingRepository.findAll();
-        for (Crawling crawling: crawlingList) {
-            System.out.println(crawling.getCreatedTime());
-        }
-    }
-
+    
 
     public Crawling findRecentData() {
         Crawling crawling = crawlingRepository.findFirstByOrderByCreatedTimeDesc();
         return crawling;
+
     }
 }

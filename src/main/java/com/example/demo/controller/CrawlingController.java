@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.CrawlingDto;
 import com.example.demo.entity.Crawling;
 import com.example.demo.service.CrawlingService;
+import jakarta.ws.rs.GET;
 import lombok.RequiredArgsConstructor;
 import org.bouncycastle.crypto.engines.CramerShoupCiphertext;
 import org.springframework.http.ResponseEntity;
