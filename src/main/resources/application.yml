@@ -21,8 +21,6 @@ spring:
   output:
     ansi:
       enabled: always
-  main:
-    web-application-type: reactive
 
 
 ## Custom

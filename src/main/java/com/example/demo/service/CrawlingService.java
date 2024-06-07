@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.client.KeywordServerClient;
 import com.example.demo.dto.CrawlingDto;
 import com.example.demo.entity.Crawling;
 import com.example.demo.repository.CrawlingRepository;
@@ -18,7 +17,6 @@ import java.util.List;
 public class CrawlingService {
 
     private final CrawlingRepository crawlingRepository;
-    private final KeywordServerClient keywordServerClient;
 
     List<String> pressIdList = List.of("081", "055", "018", "057", "032", "368", "028", "015", "029", "025",
                                                 "016", "308", "056", "047", "277", "109", "422", "117", "052", "076",
@@ -28,7 +26,7 @@ public class CrawlingService {
                                                 "079");
 
 
-    public CrawlingDto crawl(){
+    public void crawl(){
 
         StringBuilder textData = new StringBuilder();
         // 각각 언론사 별로 num 언론사 추가
@@ -53,11 +51,6 @@ public class CrawlingService {
         crawling.setRawData(textData.toString());
         crawling.setCreatedTime(LocalDateTime.now());
         crawlingRepository.save(crawling);
-
-        // Crawling 데이터를 CrawlingDto로 변환
-        CrawlingDto crawlingDto = new CrawlingDto(crawling);
-        keywordServerClient.sendRawData(crawlingDto);
-        return crawlingDto;
     }
 
     public void findAll() {
@@ -68,6 +61,8 @@ public class CrawlingService {
     }
 
 
-
-
+    public Crawling findRecentData() {
+        Crawling crawling = crawlingRepository.findFirstByOrderByCreatedTimeDesc();
+        return crawling;
+    }
 }

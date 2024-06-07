@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CrawlingRepository extends JpaRepository<Crawling,Long> {
+    Crawling findFirstByOrderByCreatedTimeDesc();
 }

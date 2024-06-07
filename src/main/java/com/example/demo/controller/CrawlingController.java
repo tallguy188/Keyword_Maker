@@ -11,25 +11,20 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-
-
 @RestController
-@RequestMapping("/crawl")
 @RequiredArgsConstructor
 public class CrawlingController {
 
     private final CrawlingService crawlingService;
 
-    @PostMapping("")
-    public ResponseEntity<CrawlingDto> crawling() throws IOException {
-        CrawlingDto crawlingDto  = crawlingService.crawl();
-        return ResponseEntity.ok(crawlingDto);
-
+    @GetMapping ("/crawling")
+    public void crawling() {
+        crawlingService.crawl();
     }
 
-//    @GetMapping("/all")
-//    public List<Crawling> crawlingList {
-//        return crawlingService.findAll();
-//    }
-
+    @GetMapping("/sendRecentData")
+    public CrawlingDto sendRecentData() {
+        Crawling crawling = crawlingService.findRecentData();
+        return new CrawlingDto(crawling);
+    }
 }
