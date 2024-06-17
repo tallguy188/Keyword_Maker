@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Setter
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor

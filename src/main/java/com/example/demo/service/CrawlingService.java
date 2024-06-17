@@ -47,10 +47,11 @@ public class CrawlingService {
 
             }
         }
-        // 추출데이터 출력
-        Crawling crawling = new Crawling();
-        crawling.setRawData(textData.toString());
-        crawling.setCreatedTime(LocalDateTime.now());
+        // 저장
+        Crawling crawling = Crawling.builder()
+                .rawData(textData.toString())
+                .createdTime(LocalDateTime.now())
+                .build();
         crawlingRepository.save(crawling);
     }
 
