@@ -19,6 +19,8 @@ public class CrawlingService {
 
     private final CrawlingRepository crawlingRepository;
 
+    private final int WINDOW_SIZE = 10;
+
     List<String> pressIdList = List.of("081", "055", "018", "057", "032", "368", "028", "015", "029", "025",
                                                 "016", "308", "056", "047", "277", "109", "422", "117", "052", "076",
                                                 "214", "139", "314", "215", "366", "003", "030", "038", "044", "020",
@@ -53,6 +55,16 @@ public class CrawlingService {
                 .createdTime(LocalDateTime.now())
                 .build();
         crawlingRepository.save(crawling);
+
+
+        // 윈도우 사이즈에 맞춰 가장 오래된 데이터 삭제
+        long dataCount = crawlingRepository.count();
+
+        if(dataCount > WINDOW_SIZE) {
+            List<Crawling> allData = crawlingRepository.findAllByOrderByCreatedTimeAsc();
+            Crawling oldData = allData.get(0);
+            crawlingRepository.delete(oldData);
+        }
     }
 
 

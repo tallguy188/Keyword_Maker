@@ -28,9 +28,4 @@ public class CrawlingController {
         Crawling crawling = crawlingService.findRecentData();
         return new CrawlingDto(crawling);
     }
-
-    @GetMapping("/main")
-    public String showMain() {
-        return "hi";
-    }
 }
