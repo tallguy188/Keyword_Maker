@@ -3,14 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.dto.CrawlingDto;
 import com.example.demo.entity.Crawling;
 import com.example.demo.service.CrawlingService;
-import jakarta.ws.rs.GET;
-import lombok.RequiredArgsConstructor;
-import org.bouncycastle.crypto.engines.CramerShoupCiphertext;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
