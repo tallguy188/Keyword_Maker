@@ -14,10 +14,10 @@
 
 ## 📌 주요 작업
 - MSA 기반 서비스 설계 및 구축
-  - Gateway Server : API Gateway, 라우팅 및 로드 밸런싱
-  - Discovery Server : 서비스 등록 및 검색
-  - Crawling Server : Jsoup을 사용한 네이버 뉴스 타이틀 크롤링
-  - Keyword Server : FeignClient를 통한 데이터 수신 및 OKT를 사용한 키워드 추출
+  - Gateway Service : API Gateway, 라우팅 및 로드 밸런싱
+  - Discovery Service : 서비스 등록 및 검색
+  - Crawling Service : Jsoup을 사용한 네이버 뉴스 타이틀 크롤링
+  - Keyword Service : FeignClient를 통한 데이터 수신 및 OKT를 사용한 키워드 추출
  
 ## 🔗 링크
 
